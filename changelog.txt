@@ -1,0 +1,18 @@
+---------------------------------------------------------------------------------------------------
+Version: 0.0.7
+Date: 2021.04.15
+  Bugfixes:
+    - Edited collision mask of internal tiles
+    - Fixed file pathing
+    - Added small change in collision mask of energy beam related entities
+---------------------------------------------------------------------------------------------------
+Version: 0.0.6
+Date: 2021.04.15
+  Bugfixes:
+    - Fixed collision mask of internal tiles
+    - Fixed improper file pathing
+---------------------------------------------------------------------------------------------------
+Version: 0.0.5
+Date: 2021.04.15
+  Info:
+    - First release
