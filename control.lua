@@ -1,13 +1,13 @@
-require("__Factorissimo2__.layout")
+require("utilities.layout")
 local HasLayout = HasLayout
 
-require("__Factorissimo2__.connections")
+require("utilities.connections")
 local Connections = Connections
 
-require("__Factorissimo2__.updates")
+require("utilities.updates")
 local Updates = Updates
 
-require("__Factorissimo2__.compat.factoriomaps")
+require("compat.factoriomaps")
 
 local mod_gui = require("mod-gui")
 -- DATA STRUCTURE --
