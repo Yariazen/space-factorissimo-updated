@@ -1139,16 +1139,15 @@ local function player_may_enter_factory(player, factory)
 			or settings.global["Factorissimo2-enemy-players-may-enter"].value
 end
 
-local function teleport_players()
+local function teleport_entity()
 	local tick = game.tick
 	for player_index, player in pairs(game.players) do
-		if player.connected and not player.driving and tick - (global.last_player_teleport[player_index] or 0) >= 45 then
+		if player.connected and not player.driving and tick - (global.last_player_teleport(player_index) or 0) >= 45 then
 			local walking_state = player.walking_state
 			if walking_state.walking then
-				if walking_state.direction == defines.direction.north
+				if walking_state.direction == defined.direction.north
 				or walking_state.direction == defines.direction.northeast
 				or walking_state.direction == defines.direction.northwest then
-					-- Enter factory
 					local factory = find_factory_by_building(player.surface, {{player.position.x-0.2, player.position.y-0.3},{player.position.x+0.2, player.position.y}})
 					if factory ~= nil then
 						if math.abs(player.position.x-factory.outside_x)<0.6 then
@@ -1167,9 +1166,9 @@ local function teleport_players()
 						end
 					end
 				end
-			end
+		elseif player.driving and tick - (global.last_player_teleport(player_index) or 0) >= 45
+			log(player.vehicle.name)
 		end
-	end
 end
 
 -- POWER MANAGEMENT --
@@ -1246,7 +1245,7 @@ script.on_event(defines.events.on_tick, function(event)
 	Connections.update() -- Duh
 
 	-- Teleport players
-	teleport_players() -- What did you expect
+	teleport_entity() -- What did you expect
 
 end)
 
