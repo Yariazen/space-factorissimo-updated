@@ -79,7 +79,7 @@ end
 
 local function floor_mask()
 	return {
-		"layer-17",
+		"layer-14",
 		"layer-55"
 	}
 end
