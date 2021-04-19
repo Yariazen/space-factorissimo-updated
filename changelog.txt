@@ -1,4 +1,11 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.0.8
+Date: 2021.04.19
+  Bugfixes:
+    - Edited collision mask of internal tiles again
+    - Cleaned up Codebase
+    - Added code for larger factories (but no sprites yet so they're not enabled)
+---------------------------------------------------------------------------------------------------
 Version: 0.0.7
 Date: 2021.04.15
   Bugfixes:
