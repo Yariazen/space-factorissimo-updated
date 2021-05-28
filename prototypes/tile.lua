@@ -11,6 +11,15 @@ local S = "__space-factorissimo-updated__"
 
 alien_biomes_priority_tiles = alien_biomes_priority_tiles or {}
 
+-- COLLISION MASKS
+-- We need to be able to refer to these layers in control.lua so getting a sequential layer from the collision mask util is not ideal
+-- remember to update control.lua setup_collision_layers()
+ -- global scope
+collision_mask_util_extended = require("collision-mask-util-extended/data/collision-mask-util-extended")
+
+-- All space tiles have this
+space_collision_layer = collision_mask_util_extended.get_make_named_collision_mask("space-tile")
+
 local function make_tile(tinfo)
 	table.insert(alien_biomes_priority_tiles, tinfo.name)
 	data:extend({
@@ -79,8 +88,7 @@ end
 
 local function floor_mask()
 	return {
-		"layer-14",
-		"layer-55"
+		space_collision_layer
 	}
 end
 
