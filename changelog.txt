@@ -1,7 +1,8 @@
-Version: 0.0.19
+Version: 0.0.10
 Date: 2021.06.06
   Info:
     - Updated required Space Exploration version for SE compatibility
+---------------------------------------------------------------------------------------------------
 Version: 0.0.9
 Date: 2021.05.27
   Bugfixes:
