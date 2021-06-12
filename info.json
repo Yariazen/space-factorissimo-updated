@@ -1,0 +1,14 @@
+{
+    "name": "space-factorissimo-updated",
+    "version": "0.0.10",
+    "factorio_version": "1.1",
+    "title": "Space Factorissimo Updated",
+    "author": "Yariazen",
+    "description": "Continuation of Space Factorissimo by Shadox for factorio 1.1.",
+    "dependencies": [
+        "base >= 1.0.0",
+        "space-exploration >= 0.5.56",
+		"Factorissimo2 >= 2.5.2"
+    ],
+    "homepage": ""
+}
