@@ -16,6 +16,14 @@ data:extend({
 		ingredients = {{"se-space-platform-plating", 500 * multiplier}, {"steel-plate", 200 * multiplier}, {"substation", 10 * multiplier}},
 		result = "space-factory-3"
 	},
+	{
+		type = "recipe",
+		name = "space-gravFactory-3",
+		enabled = false,
+		energy_required = 60,
+		ingredients = {{"se-space-platform-scaffold", 450 * multiplier}, {"steel-plate", 200 * multiplier}, {"concrete", 50 * multiplier}, {"substation", 10 * multiplier}},
+		result = "space-gravFactory-3"
+	}
 	--[[
 	,{
 		type = "recipe",

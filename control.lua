@@ -703,6 +703,14 @@ for _,f in ipairs({"space-factory-3"}) do
 	end
 end
 
+for _,f in ipairs({"space-gravFactory-3"}) do
+	SAVE_ITEMS[f] = {}
+	for n = 10,99 do
+		SAVE_NAMES[f .. "-s" .. n] = true
+		SAVE_ITEMS[f][n] = f .. "-s" .. n
+	end
+end
+
 local function save_factory(factory)
 	for _,sf in pairs(SAVE_ITEMS[factory.layout.name] or {}) do
 		if global.saved_factories[sf] then
@@ -958,6 +966,7 @@ local clone_forbidden_prefixes = {
 	"factory-2-",
 	"factory-3-",
 	"space-factory-3-",
+	"space-gravFactory-3-",
 	"factory-power-input-",
 	"factory-power-output-",
 	"factory-connection-indicator-",

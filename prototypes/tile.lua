@@ -19,6 +19,7 @@ collision_mask_util_extended = require("collision-mask-util-extended/data/collis
 
 -- All space tiles have this
 space_collision_layer = collision_mask_util_extended.get_make_named_collision_mask("space-tile")
+ground_collision_layer = collision_mask_util_extended.get_make_named_collision_mask("ground-tile")
 
 local function make_tile(tinfo)
 	table.insert(alien_biomes_priority_tiles, tinfo.name)
@@ -92,6 +93,11 @@ local function floor_mask()
 	}
 end
 
+local function gravFloor_mask()
+	return {
+		ground_collision_layer
+	}
+end
 local function pictures_out()
 	return {
 		{
@@ -158,6 +164,36 @@ make_tile{
 
 local function sf3fc() return {r=100,g=120,b=120} end
 local function sf3wc() return {r=80,g=190,b=190} end
+
+--Space GravFactory 3
+make_tile{
+	name = "space-gravFactory-floor-3",
+	collision_mask = gravFloor_mask(),
+	layer = 30,
+	pictures = pictures_ff(3),
+	map_color = sf3fc(),
+}
+make_tile{
+	name = "space-gravFactory-entrance-3",
+	collision_mask = edge_mask(),
+	layer = 30,
+	pictures = pictures_ff(3),
+	map_color = sf3fc(),
+}
+make_tile{
+	name = "space-gravFactory-pattern-3",
+	collision_mask = gravFloor_mask(),
+	layer = 30,
+	pictures = pictures_fp(3),
+	map_color = sf3wc(),
+}
+make_tile{
+	name = "space-gravFactory-wall-3",
+	collision_mask = edge_mask(),
+	layer = 70,
+	pictures = pictures_fw(3),
+	map_color = sf3wc(),
+}
 
 -- Space Factory 3
 
