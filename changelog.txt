@@ -1,9 +1,10 @@
 Version: 0.0.11
-Date: 2021.06.13
+Date: 2021.06.17
   Info:
     - Added Gravitech Factory allowing for nauvis machines to be used in space
   Bugfixes:
     - Fixed Issue with changelog
+---------------------------------------------------------------------------------------------------
 Version: 0.0.10
 Date: 2021.06.06
   Info:
