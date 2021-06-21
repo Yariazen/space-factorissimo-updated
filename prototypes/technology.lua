@@ -23,10 +23,9 @@ data:extend({
 		icon_size = 128,
 		prerequisites = {"factory-architecture-t3", "se-space-platform-plating", "electric-energy-distribution-2"},
 		effects = {
-			{
-				type = "unlock-recipe",
-				recipe = "space-factory-3",
-			}
+			{type = "unlock-recipe",recipe = "space-factory-3"},
+			{type = "unlock-recipe", recipe = "space-factory-input-pipe"},
+			{type = "unlock-recipe", recipe = "space-factory-output-pipe"},
 		},
 		unit = {
 			count = easy_research and 300 or 2000,
