@@ -53,6 +53,7 @@ local function space_factory_pipe(name, height, order)
 				"item-layer",
 				"object-layer",
 				"player-layer",
+				"moving-tile",
 			},
 			se_allow_in_space = true,
 			selection_box = {{-0.5, -0.5}, {0.5, 0.5}},

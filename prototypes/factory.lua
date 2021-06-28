@@ -66,6 +66,7 @@ local space_gravFactory_3 = function(suffix, localised_suffix, result_suffix, vi
 				"item-layer",
 				"object-layer",
 				"player-layer",
+				"moving-tile"
 			},
 			se_allow_in_space = true,
 			selection_box = {{-7.8, -7.8}, {7.8, 7.8}},
