@@ -1,6 +1,14 @@
 local F = "__Factorissimo2__"
 local S = "__space-factorissimo-updated__"
 
+--[[
+	Missing Assets opptional
+	-/graphics/tile/sfw4_1.png
+	-/graphics/tile/sfw5_1.png
+	-/graphics/tile/sfw4_1.png
+	-/graphics/tile/sfw5_1.png
+]]
+
 alien_biomes_priority_tiles = alien_biomes_priority_tiles or {}
 
 -- COLLISION MASKS
@@ -217,3 +225,65 @@ make_tile{
 	pictures = pictures_fw(3),
 	map_color = sf3wc(),
 }
+
+--[[
+-- Space Factory 4
+make_tile{
+	name = "space-factory-floor-4",
+	collision_mask = floor_mask(),
+	layer = 30,
+	pictures = pictures_ff(3),
+	map_color = sf3fc(),
+}
+make_tile{
+	name = "space-factory-entrance-4",
+	collision_mask = edge_mask(),
+	layer = 30,
+	pictures = pictures_ff(3),
+	map_color = sf3fc(),
+}
+make_tile{
+	name = "space-factory-pattern-4",
+	collision_mask = floor_mask(),
+	layer = 30,
+	pictures = pictures_fp(3),
+	map_color = sf3wc(),
+}
+make_tile{
+	name = "space-factory-wall-4",
+	collision_mask = edge_mask(),
+	layer = 70,
+	pictures = pictures_fw(3),
+	map_color = sf3wc(),
+}
+
+-- Space Factory 5
+make_tile{
+	name = "space-factory-floor-5",
+	collision_mask = floor_mask(),
+	layer = 30,
+	pictures = pictures_ff(3),
+	map_color = sf3fc(),
+}
+make_tile{
+	name = "space-factory-entrance-5",
+	collision_mask = edge_mask(),
+	layer = 30,
+	pictures = pictures_ff(3),
+	map_color = sf3fc(),
+}
+make_tile{
+	name = "space-factory-pattern-5",
+	collision_mask = floor_mask(),
+	layer = 30,
+	pictures = pictures_fp(3),
+	map_color = sf3wc(),
+}
+make_tile{
+	name = "space-factory-wall-5",
+	collision_mask = edge_mask(),
+	layer = 70,
+	pictures = pictures_fw(3),
+	map_color = sf3wc(),
+}
+]]

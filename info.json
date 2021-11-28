@@ -7,7 +7,7 @@
     "description": "Continuation of Space Factorissimo by Shadox for factorio 1.1.",
     "dependencies": [
         "base >= 1.1.0",
-        "space-exploration >= 0.5.94",
+        "space-exploration >= 0.5.56",
 		"Factorissimo2 >= 2.5.3"
     ],
     "homepage": ""
