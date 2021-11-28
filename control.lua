@@ -1,13 +1,13 @@
-require("utilities.layout")
+require("Factorissimo2.layout")
 local HasLayout = HasLayout
 
-require("utilities.connections")
+require("Factorissimo2.connections")
 local Connections = Connections
 
-require("utilities.updates")
+require("Factorissimo2.updates")
 local Updates = Updates
 
-require("compat.factoriomaps")
+require("Factorissimo2.compat.factoriomaps")
 
 local mod_gui = require("mod-gui")
 -- DATA STRUCTURE --
@@ -83,7 +83,7 @@ local function init_globals()
 end
 
 local prepare_gui = 0  -- Function stub
---local update_hidden_techs = 0 -- Function stub
+local update_hidden_techs = 0 -- Function stub
 
 local function init_gui()
 	for _, player in pairs(game.players) do
@@ -97,6 +97,9 @@ script.on_init(function()
 	Connections.init_data_structure()
 	Updates.init()
 	init_gui()
+	for _, force in pairs(game.forces) do
+		update_hidden_techs(force)
+	end
 	Compat.handle_factoriomaps()
 end)
 
@@ -702,8 +705,7 @@ for _,f in ipairs({"space-factory-3"}) do
 		SAVE_ITEMS[f][n] = f .. "-s" .. n
 	end
 end
-
-for _,f in ipairs({"space-gravFactory-3"}) do
+for _,f in ipairs({"space-gravfactory-3"}) do
 	SAVE_ITEMS[f] = {}
 	for n = 10,99 do
 		SAVE_NAMES[f .. "-s" .. n] = true
@@ -728,19 +730,13 @@ local function is_invalid_save_slot(name)
 end
 
 local function init_factory_requester_chest(entity)
-	local n = entity.request_slot_count
-	if n == 0 then return end
-	local last_slot = entity.get_request_slot(n)
-	local begin_after = last_slot and last_slot.name
 	local saved_factories = global.saved_factories
-	if not(begin_after and saved_factories[begin_after] and next(saved_factories,begin_after)) then begin_after = nil end
 	local i = 0
-	for sf,_ in next, saved_factories,begin_after do
+	for sf,_ in pairs(saved_factories) do
 		i = i+1
 		entity.set_request_slot({name=sf,count=1},i)
-		if i >= n then return end
 	end
-	for j=i+1,n do
+	for j=i+1,entity.request_slot_count do
 		entity.clear_request_slot(j)
 	end
 end
@@ -853,7 +849,7 @@ script.on_event({defines.events.on_built_entity, defines.events.on_robot_built_e
 		if Connections.is_connectable(entity) then
 			recheck_nearby_connections(entity)
 		end
-		if entity.name == "factory-requester-chest" then
+		if entity.name == "space-factory-requester-chest" then
 			init_factory_requester_chest(entity)
 		end
 	end
@@ -962,9 +958,6 @@ end)
 -- How to clone your factory
 -- This implementation will not actually clone factory buildings, but move them to where they were cloned.
 local clone_forbidden_prefixes = {
-	"factory-1-",
-	"factory-2-",
-	"factory-3-",
 	"space-factory-3-",
 	"space-gravFactory-3-",
 	"factory-power-input-",
@@ -1256,7 +1249,6 @@ script.on_event(defines.events.on_tick, function(event)
 
 	-- Teleport players
 	teleport_players() -- What did you expect
-
 end)
 
 -- CONNECTION SETTINGS --
@@ -1312,7 +1304,7 @@ script.on_event("factory-rotate", function(event)
 				Connections.rotate(factory, entity)
 			end
 		end
-	elseif entity.name == "space-factory-requester-chest" then
+	elseif entity.name == "factory-requester-chest" then
 		init_factory_requester_chest(entity)
 	end
 end)
@@ -1349,22 +1341,26 @@ end)
 
 -- MISC --
 
+update_hidden_techs = function(force)
+	if settings.global["Factorissimo2-hide-recursion"] and settings.global["Factorissimo2-hide-recursion"].value then
+		force.technologies["factory-recursion-t1"].enabled = false
+		force.technologies["factory-recursion-t2"].enabled = false
+	elseif settings.global["Factorissimo2-hide-recursion-2"] and settings.global["Factorissimo2-hide-recursion-2"].value then
+		force.technologies["factory-recursion-t1"].enabled = true
+		force.technologies["factory-recursion-t2"].enabled = false
+	else
+		force.technologies["factory-recursion-t1"].enabled = true
+		force.technologies["factory-recursion-t2"].enabled = true
+	end
+end
+
 script.on_event(defines.events.on_runtime_mod_setting_changed, function(event)
 	local setting = event.setting
-	--[[if setting == "Factorissimo2-hide-recursion" then
-		if settings.global["Factorissimo2-hide-recursion"] and settings.global["Factorissimo2-hide-recursion"].value then
-			for _, force in pairs(game.forces) do
-				force.technologies["factory-recursion-t1"].enabled = false
-				force.technologies["factory-recursion-t2"].enabled = false
-			end
-		else
-			for _, force in pairs(game.forces) do
-				force.technologies["factory-recursion-t1"].enabled = true
-				force.technologies["factory-recursion-t2"].enabled = true
-			end
+	if setting == "Factorissimo2-hide-recursion" or setting == "Factorissimo2-hide-recursion-2" then
+		for _, force in pairs(game.forces) do
+			update_hidden_techs(force)
 		end
-	else]]--
-	if setting == "Factorissimo2-indestructible-buildings" then
+	elseif setting == "Factorissimo2-indestructible-buildings" then
 		for _, factory in pairs(global.factories) do
 			update_destructible(factory)
 		end
@@ -1373,6 +1369,7 @@ end)
 
 script.on_event(defines.events.on_force_created, function(event)
 	local force = event.force
+	update_hidden_techs(force)
 end)
 
 script.on_event(defines.events.on_forces_merging, function(event)
@@ -1405,7 +1402,7 @@ script.on_event(defines.events.on_research_finished, function(event)
 	-- elseif name == "factory-recursion-t1" or name == "factory-recursion-t2" then
 		-- Nothing happens, because implementing stuff here would be horrible.
 		-- You just gotta pick up and replace your invalid factories manually for them to work with the newly researched recursion.
-	--elseif name == "factory-preview" then
-	--	for _, player in pairs(game.players) do get_camera_toggle_button(player) end
+	elseif name == "factory-preview" then
+		for _, player in pairs(game.players) do get_camera_toggle_button(player) end
 	end
 end)

@@ -1,0 +1,4 @@
+[submodule "Factorissimo2"]
+	path = Factorissimo2
+	url = https://github.com/MagmaMcFry/Factorissimo2
+	ignore = dirty
