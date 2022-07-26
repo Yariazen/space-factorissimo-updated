@@ -1,29 +1,14 @@
-local F = "__Factorissimo2__"
+local F = '__factorissimo-2-notnotmelon__';
 local S = "__space-factorissimo-updated__"
 
---[[
-	Missing Assets opptional
-	-/graphics/tile/sfw4_1.png
-	-/graphics/tile/sfw5_1.png
-	-/graphics/tile/sfw4_1.png
-	-/graphics/tile/sfw5_1.png
-]]
-
 alien_biomes_priority_tiles = alien_biomes_priority_tiles or {}
-
--- COLLISION MASKS
--- We need to be able to refer to these layers in control.lua so getting a sequential layer from the collision mask util is not ideal
--- remember to update control.lua setup_collision_layers()
- -- global scope
 collision_mask_util_extended = require("collision-mask-util-extended/data/collision-mask-util-extended")
 
--- All space tiles have this
 space_collision_layer = collision_mask_util_extended.get_make_named_collision_mask("space-tile")
-ground_collision_layer = collision_mask_util_extended.get_make_named_collision_mask("ground-tile")
 
 local function make_tile(tinfo)
 	table.insert(alien_biomes_priority_tiles, tinfo.name)
-	data:extend({
+	data:extend {
 		{
 			type = "tile",
 			name = tinfo.name,
@@ -58,8 +43,21 @@ local function make_tile(tinfo)
 				}
 			},
 			map_color = tinfo.map_color or {r = 1},
+            pollution_absorption_per_second = 0.0006
 		},
-	})
+	}
+end
+
+local function floor_mask()
+	return {
+		space_collision_layer
+	}
+end
+
+local function gravFloor_mask()
+	return {
+		ground_collision_layer
+	}
 end
 
 local function wall_mask()
@@ -87,17 +85,9 @@ local function edge_mask()
 	}
 end
 
-local function floor_mask()
-	return {
-		space_collision_layer
-	}
-end
+local function sf3fc() return {r=100,g=120,b=120} end
+local function sf3wc() return {r=80,g=190,b=190} end
 
-local function gravFloor_mask()
-	return {
-		ground_collision_layer
-	}
-end
 local function pictures_out()
 	return {
 		{
@@ -108,25 +98,21 @@ local function pictures_out()
 	}
 end
 
-local function pictures_ff(i)
-	local x = ""
-	--local x = i
-	-- x = i to make the concrete floor inside factories slightly tinted
-	-- Looks kinda ugly though with the current hues
+local function pictures_sff()
 	return {
 		{
-			picture = S.."/graphics/tile/ff"..x.."_1.png",
+			picture = S.."/graphics/tile/sff_1.png",
 			count = 16,
 			size = 1
 		},
 		{
-			picture = S.."/graphics/tile/ff"..x.."_2.png",
+			picture = S.."/graphics/tile/sff_2.png",
 			count = 4,
 			size = 2,
 			probability = 0.39,
 		},
 		{
-			picture = S.."/graphics/tile/ff"..x.."_4.png",
+			picture = S.."/graphics/tile/sff_4.png",
 			count = 4,
 			size = 4,
 			probability = 1,
@@ -134,27 +120,27 @@ local function pictures_ff(i)
 	}
 end
 
-local function pictures_fp(i)
+local function pictures_sfp()
 	return {
 		{
-			picture = S.."/graphics/tile/sfw"..i.."_1.png",
+			picture = S.."/graphics/tile/sfw3_1.png",
 			count = 16,
 			size = 1
 		},
 	}
 end
 
-local function pictures_fw(i)
+local function pictures_sfw()
 	return {
 		{
-			picture = S.."/graphics/tile/sfw"..i.."_1.png",
+			picture = S.."/graphics/tile/sfw3_1.png",
 			count = 16,
 			size = 1
 		},
 	}
 end
 
-make_tile{
+make_tile {
 	name = "out-of-space-factory",
 	collision_mask = wall_mask(),
 	layer = 70,
@@ -162,128 +148,52 @@ make_tile{
 	map_color = {r=0,g=0,b=0},
 }
 
-local function sf3fc() return {r=100,g=120,b=120} end
-local function sf3wc() return {r=80,g=190,b=190} end
+make_tile {
+	name = "space-factory-floor",
+	collision_mask = floor_mask(),
+	layer = 30,
+	pictures = pictures_sff(),
+	map_color = sf3fc(),
+}
 
---Space GravFactory 3
-make_tile{
-	name = "space-gravFactory-floor-3",
+make_tile {
+	name = "space-factory-entrance",
+	collision_mask = edge_mask(),
+	layer = 30,
+	pictures = pictures_sff(),
+	map_color = sf3fc(),
+}
+
+-- Space Factory 1
+make_tile {
+	name = "space-factory-pattern-1",
+	collision_mask = floor_mask(),
+	layer = 30,
+	pictures = pictures_sfp(),
+	map_color = sf3wc(),
+}
+
+make_tile {
+	name = "space-factory-wall-1",
+	collision_mask = edge_mask(),
+	layer = 70,
+	pictures = pictures_sfw(),
+	map_color = sf3wc(),
+}
+
+-- Space GravFactory
+make_tile {
+	name = "space-gravFactory-pattern",
 	collision_mask = gravFloor_mask(),
 	layer = 30,
-	pictures = pictures_ff(3),
-	map_color = sf3fc(),
-}
-make_tile{
-	name = "space-gravFactory-entrance-3",
-	collision_mask = edge_mask(),
-	layer = 30,
-	pictures = pictures_ff(3),
-	map_color = sf3fc(),
-}
-make_tile{
-	name = "space-gravFactory-pattern-3",
-	collision_mask = gravFloor_mask(),
-	layer = 30,
-	pictures = pictures_fp(3),
+	pictures = pictures_sfp(),
 	map_color = sf3wc(),
-}
-make_tile{
-	name = "space-gravFactory-wall-3",
+}	
+
+make_tile {
+	name = "space-gravFactory-wall",
 	collision_mask = edge_mask(),
 	layer = 70,
-	pictures = pictures_fw(3),
+	pictures = pictures_sfw(),
 	map_color = sf3wc(),
 }
-
--- Space Factory 3
-
-make_tile{
-	name = "space-factory-floor-3",
-	collision_mask = floor_mask(),
-	layer = 30,
-	pictures = pictures_ff(3),
-	map_color = sf3fc(),
-}
-make_tile{
-	name = "space-factory-entrance-3",
-	collision_mask = edge_mask(),
-	layer = 30,
-	pictures = pictures_ff(3),
-	map_color = sf3fc(),
-}
-make_tile{
-	name = "space-factory-pattern-3",
-	collision_mask = floor_mask(),
-	layer = 30,
-	pictures = pictures_fp(3),
-	map_color = sf3wc(),
-}
-make_tile{
-	name = "space-factory-wall-3",
-	collision_mask = edge_mask(),
-	layer = 70,
-	pictures = pictures_fw(3),
-	map_color = sf3wc(),
-}
-
---[[
--- Space Factory 4
-make_tile{
-	name = "space-factory-floor-4",
-	collision_mask = floor_mask(),
-	layer = 30,
-	pictures = pictures_ff(3),
-	map_color = sf3fc(),
-}
-make_tile{
-	name = "space-factory-entrance-4",
-	collision_mask = edge_mask(),
-	layer = 30,
-	pictures = pictures_ff(3),
-	map_color = sf3fc(),
-}
-make_tile{
-	name = "space-factory-pattern-4",
-	collision_mask = floor_mask(),
-	layer = 30,
-	pictures = pictures_fp(3),
-	map_color = sf3wc(),
-}
-make_tile{
-	name = "space-factory-wall-4",
-	collision_mask = edge_mask(),
-	layer = 70,
-	pictures = pictures_fw(3),
-	map_color = sf3wc(),
-}
-
--- Space Factory 5
-make_tile{
-	name = "space-factory-floor-5",
-	collision_mask = floor_mask(),
-	layer = 30,
-	pictures = pictures_ff(3),
-	map_color = sf3fc(),
-}
-make_tile{
-	name = "space-factory-entrance-5",
-	collision_mask = edge_mask(),
-	layer = 30,
-	pictures = pictures_ff(3),
-	map_color = sf3fc(),
-}
-make_tile{
-	name = "space-factory-pattern-5",
-	collision_mask = floor_mask(),
-	layer = 30,
-	pictures = pictures_fp(3),
-	map_color = sf3wc(),
-}
-make_tile{
-	name = "space-factory-wall-5",
-	collision_mask = edge_mask(),
-	layer = 70,
-	pictures = pictures_fw(3),
-	map_color = sf3wc(),
-}
-]]

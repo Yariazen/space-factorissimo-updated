@@ -1,3 +1,8 @@
+Version: 1.0.0
+Date: 2022.07.26
+  Info:
+    - Switched to using notnotmelon's remote api. This is a save breaking change so do not update until starting a new save.
+---------------------------------------------------------------------------------------------------
 Version: 0.0.12
 Date: 2021.06.17
   Info:
