@@ -195,7 +195,33 @@ script.on_init(function()
 	add_spaceFactory1Layout()
 	add_gravFactoryLayout()
 end)
+
 script.on_configuration_changed(function()
 	add_spaceFactory1Layout()
 	add_gravFactoryLayout()
+end)
+
+
+local grounded_filter = {
+	"se-space-assembling-machine",
+	"se-biochemical-laboratory",
+	"se-space-decontamination-facility",
+	"se-space-hypercooler",
+	"se-space-laser-laboratory",
+	"se-space-manufactory",
+	"se-space-mechanical-laboratory",
+	"se-space-particle-accelerator",
+	"se-space-radiation-laboratory",
+	"se-space-radiator-2",
+	"se-space-radiator",
+	"se-space-supercomputer-2",
+	"se-space-supercomputer-3",
+	"se-space-supercomputer-4",
+	"se-space-thermodynamics-laboratory"
+}
+script.on_event(defines.events.on_tick, function(event)
+	local s = event.tick%60 + 1
+	local factories = global.factories or {}
+	while s <= #factories do
+		local factory = f
 end)

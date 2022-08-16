@@ -4,7 +4,7 @@ local S = "__space-factorissimo-updated__"
 alien_biomes_priority_tiles = alien_biomes_priority_tiles or {}
 collision_mask_util_extended = require("collision-mask-util-extended/data/collision-mask-util-extended")
 
-space_collision_layer = collision_mask_util_extended.get_make_named_collision_mask("space-tile")
+local interior_tile = collision_mask_util_extended.get_make_named_collision_mask("interior-tile")
 
 local function make_tile(tinfo)
 	table.insert(alien_biomes_priority_tiles, tinfo.name)
@@ -50,13 +50,13 @@ end
 
 local function floor_mask()
 	return {
-		space_collision_layer
+		interior_tile
 	}
 end
 
 local function gravFloor_mask()
 	return {
-		ground_collision_layer
+		"ground-tile"
 	}
 end
 
