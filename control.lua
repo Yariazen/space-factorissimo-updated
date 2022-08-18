@@ -201,27 +201,17 @@ script.on_configuration_changed(function()
 	add_gravFactoryLayout()
 end)
 
-
-local grounded_filter = {
-	"se-space-assembling-machine",
-	"se-biochemical-laboratory",
-	"se-space-decontamination-facility",
-	"se-space-hypercooler",
-	"se-space-laser-laboratory",
-	"se-space-manufactory",
-	"se-space-mechanical-laboratory",
-	"se-space-particle-accelerator",
-	"se-space-radiation-laboratory",
-	"se-space-radiator-2",
-	"se-space-radiator",
-	"se-space-supercomputer-2",
-	"se-space-supercomputer-3",
-	"se-space-supercomputer-4",
-	"se-space-thermodynamics-laboratory"
-}
-script.on_event(defines.events.on_tick, function(event)
-	local s = event.tick%60 + 1
-	local factories = global.factories or {}
-	while s <= #factories do
-		local factory = f
+script.on_event({defines.events.on_built_entity, defines.events.on_robot_built_entity, defines.events.script_raised_built, defines.events.script_raised_revive}, function(event)
+	local entity = event.created_entity or event.entity
+	local name = string.lower(entity.name)
+	if settings.global["Factorissimo2-same-surface"] then
+		-- one surface
+	end
+	if string.find(name, "space") and string.find(name, "factory") and entity.type == "storage-tank" then
+		log(entity.surface.name)
+		for surface, _ in pairs(remote.call("factorissimo", "get_global", {"surface_factory_counters"})) do
+			--log(serpent.block(surface))
+			--surface = game.get_surface(surface)
+		end
+	end
 end)
