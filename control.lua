@@ -200,25 +200,3 @@ script.on_configuration_changed(function()
 	add_spaceFactory1Layout()
 	add_gravFactoryLayout()
 end)
-
-script.on_event({defines.events.on_built_entity, defines.events.on_robot_built_entity, defines.events.script_raised_built, defines.events.script_raised_revive}, function(event)
-	log(serpent.block(remote.call("factorissimo", "get_global", {"surface_factory_counters"})))
-	local entity = event.created_entity or event.entity
-	if string.find(string.lower(entity.name), "space") and string.find(string.lower(entity.name), "factory") and entity.type == "storage-tank" then
-		local surface_factory_counters = {}
-		for surface_name, count in pairs(remote.call("factorissimo", "get_global", {"surface_factory_counters"})) do
-			if not string.starts(surface_name, "Space Factory") then
-				local surface = game.get_surface(surface_name)
-				local name = "Space Factory " .. string.sub(surface.name, -1)
-				surface.name = name
-				table.insert(surface_factory_counters, {[name]=count})
-			end
-		end
-		remote.call("factorissimo", "set_global", {"surface_factory_counters"}, surface_factory_counters)
-	end
-	log(serpent.block(remote.call("factorissimo", "get_global", {"surface_factory_counters"})))
-end)
-
-function string.starts(String,Start)
-	return string.sub(String,1,string.len(Start))==Start
- end
