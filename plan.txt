@@ -4,3 +4,9 @@ space factory 3		replace current space factory 1
 
 grav factory 1      replace current grav factory in technology but is t2 factory
 grav factory 2      current grav factory
+
+Goldenrod
+Lime Green
+Dark Magenta
+Dark Khaki
+Dark Sea Green

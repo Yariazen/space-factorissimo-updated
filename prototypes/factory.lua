@@ -3,175 +3,124 @@ local F = '__factorissimo-2-notnotmelon__';
 
 require("circuit-connector-sprites")
 
-local function SpaceFactory1MapColor()
-    return {r = 0.55, g = 0.7, b = 0.8}
-end
-local function SpaceFactory2MapColor()
-    return {r = 0.55, g = 0.7, b = 0.8}
-end
-local function SpaceFactory3MapColor()
-    return {r = 0.55, g = 0.7, b = 0.8}
-end
-local function GravFactory1MapColor()
-    return {r = 0.55, g = 0.7, b = 0.8}
-end
-
 local function blank()
-	return {
-		filename = F.."/graphics/nothing.png",
-		priority = "high",
-		width = 1,
-		height = 1,
-	}
+    return {
+        filename = F .. "/graphics/nothing.png",
+        priority = "high",
+        width = 1,
+        height = 1,
+    }
 end
+
 local function ablank()
-	return {
-		filename = F.."/graphics/nothing.png",
-		priority = "high",
-		width = 1,
-		height = 1,
-		frame_count = 1,
-	}
+    return {
+        filename = F .. "/graphics/nothing.png",
+        priority = "high",
+        width = 1,
+        height = 1,
+        frame_count = 1,
+    }
 end
 
--- Space Factory 3
-data:extend {
-    {
-        type = "storage-tank",
-        name = "space-factory-3",
-        localised_name = {"entity-name.space-factory-3"},
-        icon = S.."/graphics/icon/space-factory-3.png",
-        icon_size = 32,
-        flags = {"player-creation"},
-        mineable = {mining_time = 5, result = "space-factory-3", count = 1},
-        max_health = 5000,
-        collision_box = {{-7.8, -7.8}, {7.8, 7.8}},
-        collision_mask = {
-            "water-tile",
-            "ground-tile",
-            "item-layer",
-            "object-layer",
-            "player-layer",
-        },
-        se_allow_in_space = true,
-		selection_box = {{-7.8, -7.8}, {7.8, 7.8}},
-        vehicle_impact_sound = { filename = "__base__/sound/car-stone-impact.ogg", volume = 1.0 },
-        pictures = {
-            picture = {
-                layers = {
-                    {
-                        filename = S.."/graphics/factory/space-factory-3-shadow.png",
-                        width = 704,
-                        height = 608,
-                        shift = {2, -0.09375},
-                        draw_as_shadow = true
-                    },
-                    {
-                        filename = S.."/graphics/factory/space-factory-3.png",
-                        width = 704,
-                        height = 608,
-                        shift = {2, -0.09375},
-                    }
-                }
-            },
-            fluid_background = blank(),
-            window_background = blank(),
-            flow_sprite = blank(),
-            gas_flow = ablank()
-        },
-        window_bounding_box = {{0,0},{0,0}},
-        fluid_box = {
-            base_area = 1,
-            pipe_covers = pipecoverspictures(),
-            pipe_connections = {},
-        },
-        flow_length_in_ticks = 1,
-		circuit_wire_connection_points = circuit_connector_definitions["storage-tank"].points,
-		circuit_connector_sprites = circuit_connector_definitions["storage-tank"].sprites,
-		circuit_wire_max_distance = 0,
-		map_color = {r = 0.55, g = 0.7, b = 0.8},
-        is_military_target = true
-    },
-    {
-        type = "item-with-tags",
-        name = "space-factory-3",
-        localised_name = {"entity-name.space-factory-3"},
-        icon = S.."/graphics/icon/space-factory-3.png",
-        icon_size = 32,
-        subgroup = "factorissimo2",
-		order = "a-c",
-		place_result = "space-factory-3",
-		stack_size = 1
+local function spacefactory_collision_mask()
+    return {
+        "water-tile",
+        "ground-tile",
+        "item-layer",
+        "object-layer",
+        "player-layer",
     }
-}
+end
 
--- Space GravFactory
-data:extend {
-    {
-        type = "storage-tank",
-        name = "space-gravFactory",
-        localised_name = {"entity-name.space-gravFactory"},
-        icon = S.."/graphics/icon/space-gravFactory.png",
-        icon_size = 32,
-        flags = {"player-creation"},
-        mineable = {mining_time = 5, result = "space-gravFactory", count = 1},
-        max_health = 5000,
-        collision_box = {{-7.8, -7.8}, {7.8, 7.8}},
-        collision_mask = {
-            "water-tile",
-            "ground-tile",
-            "item-layer",
-            "object-layer",
-            "player-layer",
-        },
-        se_allow_in_space = true,
-		selection_box = {{-7.8, -7.8}, {7.8, 7.8}},
-        vehicle_impact_sound = { filename = "__base__/sound/car-stone-impact.ogg", volume = 1.0 },
-        pictures = {
-            picture = {
-                layers = {
-                    {
-                        filename = S.."/graphics/factory/space-gravFactory-shadow.png",
-                        width = 704,
-                        height = 608,
-                        shift = {2, -0.09375},
-                        draw_as_shadow = true
-                    },
-                    {
-                        filename = S.."/graphics/factory/space-gravFactory.png",
-                        width = 704,
-                        height = 608,
-                        shift = {2, -0.09375},
-                    }
-                }
-            },
-            fluid_background = blank(),
-            window_background = blank(),
-            flow_sprite = blank(),
-            gas_flow = ablank()
-        },
-        window_bounding_box = {{0,0},{0,0}},
-        fluid_box = {
-            base_area = 1,
-            pipe_covers = pipecoverspictures(),
-            pipe_connections = {},
-        },
-        flow_length_in_ticks = 1,
-		circuit_wire_connection_points = circuit_connector_definitions["storage-tank"].points,
-		circuit_connector_sprites = circuit_connector_definitions["storage-tank"].sprites,
-		circuit_wire_max_distance = 0,
-		map_color = {r = 0.55, g = 0.7, b = 0.8},
-        is_military_target = true
-    },
-    {
-        type = "item-with-tags",
-        name = "space-gravFactory",
-        localised_name = {"entity-name.space-gravFactory"},
-        icon = S.."/graphics/icon/space-gravFactory.png",
-        icon_size = 32,
-        subgroup = "factorissimo2",
-		order = "a-c",
-		place_result = "space-gravFactory",
-		stack_size = 1
+local function tier_1_factory()
+    return {
+        source_rect = { { -3.8, -3.8 }, { 3.8, 3.8 } },
+        width = 416,
+        height = 320,
+        shift = { 1.5, 0 }
     }
-}
+end
+
+local function tier_2_factory()
+    return {
+        source_rect = { { -5.8, -5.8 }, { 5.8, 5.8 } },
+        width = 544,
+        height = 448,
+        shift = { 1.5, 0 }
+    }
+end
+
+local function tier_3_factory()
+    return {
+        source_rect = { { -7.8, -7.8 }, { 7.8, 7.8 } },
+        width = 704,
+        height = 608,
+        shift = { 2, -0.09375 }
+    }
+end
+
+local function factory_prototype(name, map_color, factory_default)
+    data:extend {
+        {
+            type = "storage-tank",
+            name = name,
+            localised_name = { "entity-name." .. name },
+            icon = S .. "/graphics/icon/" .. name .. ".png",
+            icon_size = 32,
+            flags = { "player-creation" },
+            mineable = { mining_time = 5, result = name, count = 1 },
+            max_health = 5000,
+            collision_box = factory_default.source_rect,
+            collision_mask = spacefactory_collision_mask(),
+            se_allow_in_space = true,
+            selection_box = factory_default.source_rect,
+            vehicle_impact_sound = { filename = "__base__/sound/car-stone-impact.ogg", volume = 1.0 },
+            pictures = {
+                picture = {
+                    layers = {
+                        {
+                            filename = S .. "/graphics/factory/" .. name .. "-shadow.png",
+                            width = factory_default.width,
+                            height = factory_default.height,
+                            shift = factory_default.shift,
+                            draw_as_shadow = true
+                        },
+                        {
+                            filename = S .. "/graphics/factory/" .. name .. ".png",
+                            width = factory_default.width,
+                            height = factory_default.height,
+                            shift = factory_default.shift,
+                        }
+                    }
+                },
+                fluid_background = blank(),
+                window_background = blank(),
+                flow_sprite = blank(),
+                gas_flow = ablank()
+            },
+            window_bounding_box = { { 0, 0 }, { 0, 0 } },
+            fluid_box = {
+                base_area = 1,
+                pipe_covers = pipecoverspictures(),
+                pipe_connections = {},
+            },
+            flow_length_in_ticks = 1,
+            circuit_wire_connection_points = circuit_connector_definitions["storage-tank"].points,
+            circuit_connector_sprites = circuit_connector_definitions["storage-tank"].sprites,
+            circuit_wire_max_distance = 0,
+            map_color = map_color,
+            is_military_target = true
+        },
+        {
+            type = "item-with-tags",
+            name = name,
+            localised_name = { "entity-name." .. name },
+            icon = S .. "/graphics/icon/" .. name .. ".png",
+            icon_size = 32,
+            subgroup = "factorissimo2",
+            order = "a-c",
+            place_result = name,
+            stack_size = 1
+        }
+    }
+end
