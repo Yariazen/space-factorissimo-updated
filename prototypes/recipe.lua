@@ -5,7 +5,7 @@ function recipe_prototype(name, ingredients)
 			name = name,
 			enabled = false,
 			energy_required = 60,
-			ingredients = ingredients
+			ingredients = ingredients,
 			result = name
 		}
 	}
