@@ -1,21 +1,12 @@
-data:extend {
-	{
-		type = "recipe",
-		name = "space-factory-1",
-		enabled = false,
-		energy_required = 60,
-		ingredients = {{"se-space-platform-plating", 5000}, {"steel-plate", 2000}, {"substation", 100}},
-		result = "space-factory-1"
+function recipe_prototype(name, ingredients)
+	data:extend {
+		{
+			type = "recipe",
+			name = name,
+			enabled = false,
+			energy_required = 60,
+			ingredients = ingredients
+			result = name
+		}
 	}
-};
-
-data:extend {
-	{
-		type = "recipe",
-		name = "space-gravFactory",
-		enabled = false,
-		energy_required = 60,
-		ingredients = {{"se-space-platform-plating", 5000}, {"steel-plate", 2000}, {"substation", 100}},
-		result = "space-gravFactory"
-	}
-};
+end

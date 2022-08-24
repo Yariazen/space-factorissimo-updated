@@ -32,7 +32,7 @@ local function spacefactory_collision_mask()
     }
 end
 
-local function tier_1_factory()
+function tier_1_factory()
     return {
         source_rect = { { -3.8, -3.8 }, { 3.8, 3.8 } },
         width = 416,
@@ -41,7 +41,7 @@ local function tier_1_factory()
     }
 end
 
-local function tier_2_factory()
+function tier_2_factory()
     return {
         source_rect = { { -5.8, -5.8 }, { 5.8, 5.8 } },
         width = 544,
@@ -50,7 +50,7 @@ local function tier_2_factory()
     }
 end
 
-local function tier_3_factory()
+function tier_3_factory()
     return {
         source_rect = { { -7.8, -7.8 }, { 7.8, 7.8 } },
         width = 704,
@@ -59,7 +59,7 @@ local function tier_3_factory()
     }
 end
 
-local function factory_prototype(name, map_color, factory_default)
+function factory_prototype(name, map_color, factory_default)
     data:extend {
         {
             type = "storage-tank",
