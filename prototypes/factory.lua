@@ -3,6 +3,19 @@ local F = '__factorissimo-2-notnotmelon__';
 
 require("circuit-connector-sprites")
 
+local function SpaceFactory1MapColor()
+    return {r = 0.55, g = 0.7, b = 0.8}
+end
+local function SpaceFactory2MapColor()
+    return {r = 0.55, g = 0.7, b = 0.8}
+end
+local function SpaceFactory3MapColor()
+    return {r = 0.55, g = 0.7, b = 0.8}
+end
+local function GravFactory1MapColor()
+    return {r = 0.55, g = 0.7, b = 0.8}
+end
+
 local function blank()
 	return {
 		filename = F.."/graphics/nothing.png",
@@ -21,16 +34,16 @@ local function ablank()
 	}
 end
 
--- Space Factory 1
+-- Space Factory 3
 data:extend {
     {
         type = "storage-tank",
-        name = "space-factory-1",
-        localised_name = {"entity-name.space-factory-1"},
-        icon = S.."/graphics/icon/space-factory-1.png",
+        name = "space-factory-3",
+        localised_name = {"entity-name.space-factory-3"},
+        icon = S.."/graphics/icon/space-factory-3.png",
         icon_size = 32,
         flags = {"player-creation"},
-        mineable = {mining_time = 5, result = "space-factory-1", count = 1},
+        mineable = {mining_time = 5, result = "space-factory-3", count = 1},
         max_health = 5000,
         collision_box = {{-7.8, -7.8}, {7.8, 7.8}},
         collision_mask = {
@@ -47,14 +60,14 @@ data:extend {
             picture = {
                 layers = {
                     {
-                        filename = S.."/graphics/factory/space-factory-1-shadow.png",
+                        filename = S.."/graphics/factory/space-factory-3-shadow.png",
                         width = 704,
                         height = 608,
                         shift = {2, -0.09375},
                         draw_as_shadow = true
                     },
                     {
-                        filename = S.."/graphics/factory/space-factory-1.png",
+                        filename = S.."/graphics/factory/space-factory-3.png",
                         width = 704,
                         height = 608,
                         shift = {2, -0.09375},
@@ -81,13 +94,13 @@ data:extend {
     },
     {
         type = "item-with-tags",
-        name = "space-factory-1",
-        localised_name = {"entity-name.space-factory-1"},
-        icon = S.."/graphics/icon/space-factory-1.png",
+        name = "space-factory-3",
+        localised_name = {"entity-name.space-factory-3"},
+        icon = S.."/graphics/icon/space-factory-3.png",
         icon_size = 32,
         subgroup = "factorissimo2",
 		order = "a-c",
-		place_result = "space-factory-1",
+		place_result = "space-factory-3",
 		stack_size = 1
     }
 }
