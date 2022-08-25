@@ -1,5 +1,5 @@
 function recipe_prototype(name, ingredients)
-	data:extend {
+	data:extend ({
 		{
 			type = "recipe",
 			name = name,
@@ -8,5 +8,5 @@ function recipe_prototype(name, ingredients)
 			ingredients = ingredients,
 			result = name
 		}
-	}
+	})
 end

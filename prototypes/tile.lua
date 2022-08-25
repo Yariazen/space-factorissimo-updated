@@ -6,7 +6,7 @@ collision_mask_util_extended = require("collision-mask-util-extended/data/collis
 
 local interior_tile = collision_mask_util_extended.get_make_named_collision_mask("interior-tile")
 
-local function make_tile(tinfo)
+function make_tile(tinfo)
 	table.insert(alien_biomes_priority_tiles, tinfo.name)
 	data:extend {
 		{
@@ -164,36 +164,19 @@ make_tile {
 	map_color = sf3fc(),
 }
 
--- Space Factory 1
-make_tile {
-	name = "space-factory-pattern-1",
-	collision_mask = floor_mask(),
-	layer = 30,
-	pictures = pictures_sfp(),
-	map_color = sf3wc(),
-}
-
-make_tile {
-	name = "space-factory-wall-1",
-	collision_mask = edge_mask(),
-	layer = 70,
-	pictures = pictures_sfw(),
-	map_color = sf3wc(),
-}
-
--- Space GravFactory
-make_tile {
-	name = "space-gravFactory-pattern",
-	collision_mask = gravFloor_mask(),
-	layer = 30,
-	pictures = pictures_sfp(),
-	map_color = sf3wc(),
-}	
-
-make_tile {
-	name = "space-gravFactory-wall",
-	collision_mask = edge_mask(),
-	layer = 70,
-	pictures = pictures_sfw(),
-	map_color = sf3wc(),
-}
+function tile_prototype(name)
+	make_tile ({
+		name = name:sub(0, #name-1) .. "pattern" .. name:sub(#name-1, #name),
+		collision_mask = floor_mask(),
+		layer = 30,
+		pictures = pictures_sfp(),
+		map_color = sf3wc(),
+	})
+	make_tile ({
+		name = name:sub(0, #name-1) .. "wall" .. name:sub(#name-1, #name),
+		collision_mask = edge_mask(),
+		layer = 70,
+		pictures = pictures_sfw(),
+		map_color = sf3wc(),
+	})
+end

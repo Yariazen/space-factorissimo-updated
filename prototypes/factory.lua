@@ -32,35 +32,8 @@ local function spacefactory_collision_mask()
     }
 end
 
-function tier_1_factory()
-    return {
-        source_rect = { { -3.8, -3.8 }, { 3.8, 3.8 } },
-        width = 416,
-        height = 320,
-        shift = { 1.5, 0 }
-    }
-end
-
-function tier_2_factory()
-    return {
-        source_rect = { { -5.8, -5.8 }, { 5.8, 5.8 } },
-        width = 544,
-        height = 448,
-        shift = { 1.5, 0 }
-    }
-end
-
-function tier_3_factory()
-    return {
-        source_rect = { { -7.8, -7.8 }, { 7.8, 7.8 } },
-        width = 704,
-        height = 608,
-        shift = { 2, -0.09375 }
-    }
-end
-
-function factory_prototype(name, map_color, factory_default)
-    data:extend {
+local function factory_prototype(name, map_color, factory_default)
+    data:extend ({
         {
             type = "storage-tank",
             name = name,
@@ -122,5 +95,32 @@ function factory_prototype(name, map_color, factory_default)
             place_result = name,
             stack_size = 1
         }
-    }
+    })
+end
+
+function tier_1_factory(name, map_color)
+    factory_prototype(name, map_color, {
+        source_rect = { { -3.8, -3.8 }, { 3.8, 3.8 } },
+        width = 416,
+        height = 320,
+        shift = { 1.5, 0 }
+    })
+end
+
+function tier_2_factory(name, map_color)
+    factory_prototype(name, map_color, {
+        source_rect = { { -5.8, -5.8 }, { 5.8, 5.8 } },
+        width = 544,
+        height = 448,
+        shift = { 1.5, 0 }
+    })
+end
+
+function tier_3_factory(name, map_color)
+    factory_prototype(name, map_color, {
+        source_rect = { { -7.8, -7.8 }, { 7.8, 7.8 } },
+        width = 704,
+        height = 608,
+        shift = { 2, -0.09375 }
+    })
 end

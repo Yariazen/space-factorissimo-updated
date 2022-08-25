@@ -2,6 +2,7 @@ require("prototypes.factory")
 require("prototypes.recipe")
 require("prototypes.technology")
 require("prototypes.tile")
+require("prototypes.input")
 
 -- Custom Inputs
 input_prototype("factory-rotate", "R")
@@ -22,16 +23,19 @@ factory_prototype("space-factory-2",
 
 -- Space Factory 3
 local spaceFactory3 = "space-factory-3"
-factory_prototype(spaceFactory3,
-    { r = 0.55, g = 0.7, b = 0.8 }, tier_3_factory)
+tier_3_factory(spaceFactory3, { r = 0.55, g = 0.7, b = 0.8 })
+tier_3_architecture(spaceFactory3,
+    { "factory-architecture-t3", "se-space-platform-plating", "electric-energy-distribution-2" },
+    {
+        { "automation-science-pack", 1 },
+        { "logistic-science-pack", 1 },
+        { "chemical-science-pack", 1 },
+        { "se-rocket-science-pack", 1 },
+        { "space-science-pack", 1 },
+        { "production-science-pack", 1 }
+    })
 recipe_prototype(spaceFactory3, { { "se-space-platform-plating", 5000 }, { "steel-plate", 2000 }, { "substation", 100 } })
-technology_prototype("space-factory-architecture-t3",
-    { "factory-architecture-t3", "se-space-platform-plating", "electric-energy-distribution-2" }, {
-        { type = "unlock-recipe", recipe = "space-gravFactory" }
-    }, {
-    
-})
-
+tile_prototype(spaceFactory3)
 
 -- Space GravFactory 1 TODO
 --[[
@@ -45,57 +49,3 @@ factory_prototype("grav-Factory-1",
 factory_prototype("space-factory-3",
     { r = 0.55, g = 0.7, b = 0.8 }, tier_3_factory)
 ]]
-
-data:extend {
-    {
-        type = "technology",
-        name = "space-factory-architecture-t1",
-        icon = S .. "/graphics/technology/space-factory-architecture-1.png",
-        icon_size = 128,
-        prerequisites = { "factory-architecture-t3", "se-space-platform-plating", "electric-energy-distribution-2" },
-        effects = {
-            { type = "unlock-recipe", recipe = "space-factory-1" }
-        },
-        unit = {
-            count = 5000,
-            ingredients = {
-                { "automation-science-pack", 1 },
-                { "logistic-science-pack", 1 },
-                { "chemical-science-pack", 1 },
-                { "se-rocket-science-pack", 1 },
-                { "space-science-pack", 1 },
-                { "production-science-pack", 1 }
-            },
-            time = 60
-        },
-        order = "a-c"
-    },
-    {
-        type = "technology",
-        name = "space-gravFactory-architecture",
-        icon = S .. "/graphics/technology/space-gravFactory-architecture.png",
-        icon_size = 128,
-        prerequisites = { "factory-architecture-t3", "se-space-platform-plating", "se-deep-space-science-pack-1" },
-        effects = {
-            { type = "unlock-recipe", recipe = "space-gravFactory" }
-        },
-        unit = {
-            count = 5000,
-            ingredients = {
-                { "automation-science-pack", 1 },
-                { "logistic-science-pack", 1 },
-                { "chemical-science-pack", 1 },
-                { "se-rocket-science-pack", 1 },
-                { "space-science-pack", 1 },
-                { "utility-science-pack", 1 },
-                { "production-science-pack", 1 },
-                { "se-astronomic-science-pack-1", 1 },
-                { "se-energy-science-pack-1", 1 },
-                { "se-material-science-pack-1", 1 },
-                { "se-deep-space-science-pack-1", 1 }
-            },
-            time = 60
-        },
-        order = "a-c"
-    }
-}
