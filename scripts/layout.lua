@@ -6,7 +6,7 @@ local west = defines.direction.west
 local make_connection = function(...) return remote.call('factorissimo', 'make_connection', ...) end
 
 local pattern_table = {
-    ["space"] = {
+    ["factory"] = {
         ["1"] = {
             ' +++++   ++ ',
             '++++++  +++ ',
@@ -38,7 +38,7 @@ local pattern_table = {
             '+++++   +++ ',
         }
     },
-    ["gravity"] = {
+    ["gravfactory"] = {
         ["1"] = {
             '  ++++   ++ ',
             '++++++  +++ ',
@@ -101,10 +101,11 @@ function make_layout(info)
 end
 
 function tier_1_layout(name)
-    info = {}
+    local info = {}
     info.name = name
     info.fullType = name:sub(0, #name - 2)
-    info.partType = name:match("(.+)-(.+)-(.+)")
+    local _, partType = name:match("(.+)-(.+)-(.+)")
+    info.partType = partType
     info.tier = name:sub(#name, #name + 1)
     info.overlay_name = name .. "-overlay"
     info.wall = info.fullType .. "-wall-" .. info.tier
@@ -170,10 +171,11 @@ function tier_1_layout(name)
 end
 
 function tier_2_layout(name)
-    info = {}
+    local info = {}
     info.name = name
     info.fullType = name:sub(0, #name - 2)
-    info.partType = name:match("(.+)-(.+)-(.+)")
+    local _, partType = name:match("(.+)-(.+)-(.+)")
+    info.partType = partType
     info.tier = name:sub(#name, #name + 1)
     info.overlay_name = name .. "-overlay"
     info.wall = info.fullType .. "-wall-" .. info.tier
@@ -246,10 +248,10 @@ function tier_2_layout(name)
 end
 
 function tier_3_layout(name)
-    info = {}
+    local info = {}
     info.name = name
-    info.fullType = name:sub(0, #name - 2)
-    info.partType = name:match("(.+)-(.+)-(.+)")
+    local _, partType = name:match("(.+)-(.+)-(.+)")
+    info.partType = partType
     info.tier = name:sub(#name, #name + 1)
     info.overlay_name = name .. "-overlay"
     info.wall = info.fullType .. "-wall-" .. info.tier
