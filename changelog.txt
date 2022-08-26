@@ -1,8 +1,16 @@
 ---------------------------------------------------------------------------------------------------
-Version: 1.0.3
-Date: 2022.08.18
-  BugFix:
-    - Space Exploration Compatibility
+Version: 1.1.0
+Date: 2022.08.26
+  Info:
+    - Refactored entire code base
+    - Adds Space Factory versions of factory 1 and factory 2
+    - Adds Gravity Factory versions of factory 2 and factory 3
+    - Changes Space Factory 1 to Space Factory 3
+    - Implements compatibility features with Space Exploration
+    - Rebalances current technology tree
+    - Rebalances current factory recipe
+  Bugfixes:
+    - Resolved issue where buildings in Space Factory are grounded again
 ---------------------------------------------------------------------------------------------------
 Version: 1.0.2
 Date: 2022.08.01
