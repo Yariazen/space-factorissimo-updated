@@ -1,10 +1,12 @@
-local F = '__factorissimo-2-notnotmelon__';
+require("scripts.utility")
+
+local F = '__factorissimo-2-notnotmelon__'
 local S = "__space-factorissimo-updated__"
 
 alien_biomes_priority_tiles = alien_biomes_priority_tiles or {}
-collision_mask_util_extended = require("collision-mask-util-extended/data/collision-mask-util-extended")
 
 local interior_tile = collision_mask_util_extended.get_make_named_collision_mask("interior-tile")
+local space_tile = collision_mask_util_extended.get_make_named_collision_mask("space-tile")
 
 function make_tile(tinfo)
 	table.insert(alien_biomes_priority_tiles, tinfo.name)
@@ -17,11 +19,11 @@ function make_tile(tinfo)
 			layer = tinfo.layer or 50,
 			variants = {
 				main = tinfo.pictures,
-				inner_corner = { picture = F.."/graphics/nothing.png", count = 0 },
-				outer_corner = { picture = F.."/graphics/nothing.png", count = 0 },
-				side = { picture = F.."/graphics/nothing.png", count = 0 },
-				u_transition = { picture = F.."/graphics/nothing.png", count = 0 },
-				o_transition = { picture = F.."/graphics/nothing.png", count = 0 },
+				inner_corner = { picture = F .. "/graphics/nothing.png", count = 0 },
+				outer_corner = { picture = F .. "/graphics/nothing.png", count = 0 },
+				side = { picture = F .. "/graphics/nothing.png", count = 0 },
+				u_transition = { picture = F .. "/graphics/nothing.png", count = 0 },
+				o_transition = { picture = F .. "/graphics/nothing.png", count = 0 },
 			},
 			walking_speed_modifier = 1.3,
 			walking_sound = {
@@ -42,21 +44,16 @@ function make_tile(tinfo)
 					volume = 1.2
 				}
 			},
-			map_color = tinfo.map_color or {r = 1},
-            pollution_absorption_per_second = 0.0006
+			map_color = tinfo.map_color or { r = 1 },
+			pollution_absorption_per_second = 0.0006
 		},
 	}
 end
 
 local function floor_mask()
 	return {
-		interior_tile
-	}
-end
-
-local function gravFloor_mask()
-	return {
-		"ground-tile"
+		interior_tile,
+		space_tile
 	}
 end
 
@@ -85,8 +82,7 @@ local function edge_mask()
 	}
 end
 
-local function sf3fc() return {r=100,g=120,b=120} end
-local function sf3wc() return {r=80,g=190,b=190} end
+local function sf3fc() return { r = 100, g = 120, b = 120 } end
 
 local function pictures_out()
 	return {
@@ -101,18 +97,18 @@ end
 local function pictures_sff()
 	return {
 		{
-			picture = S.."/graphics/tile/sff_1.png",
+			picture = S .. "/graphics/tile/sff_1.png",
 			count = 16,
 			size = 1
 		},
 		{
-			picture = S.."/graphics/tile/sff_2.png",
+			picture = S .. "/graphics/tile/sff_2.png",
 			count = 4,
 			size = 2,
 			probability = 0.39,
 		},
 		{
-			picture = S.."/graphics/tile/sff_4.png",
+			picture = S .. "/graphics/tile/sff_4.png",
 			count = 4,
 			size = 4,
 			probability = 1,
@@ -120,20 +116,20 @@ local function pictures_sff()
 	}
 end
 
-local function pictures_sfp()
+local function pictures_fp(i)
 	return {
 		{
-			picture = S.."/graphics/tile/sfw3_1.png",
+			picture = S .. '/graphics/tile/sft_' .. i .. '.png',
 			count = 16,
 			size = 1
 		},
 	}
 end
 
-local function pictures_sfw()
+local function pictures_fw(i)
 	return {
 		{
-			picture = S.."/graphics/tile/sfw3_1.png",
+			picture = S .. '/graphics/tile/sft_' .. i .. '.png',
 			count = 16,
 			size = 1
 		},
@@ -145,7 +141,7 @@ make_tile {
 	collision_mask = wall_mask(),
 	layer = 70,
 	pictures = pictures_out(),
-	map_color = {r=0,g=0,b=0},
+	map_color = { r = 0, g = 0, b = 0 },
 }
 
 make_tile {
@@ -164,19 +160,19 @@ make_tile {
 	map_color = sf3fc(),
 }
 
-function tile_prototype(name)
-	make_tile ({
-		name = name:sub(0, #name-1) .. "pattern" .. name:sub(#name-1, #name),
+function tile_prototype(name, map_color)
+	make_tile({
+		name = name:sub(0, #name - 1) .. "pattern" .. name:sub(#name - 1, #name),
 		collision_mask = floor_mask(),
 		layer = 30,
-		pictures = pictures_sfp(),
-		map_color = sf3wc(),
+		pictures = pictures_fp(name:sub(#name, #name + 1)),
+		map_color = map_color,
 	})
-	make_tile ({
-		name = name:sub(0, #name-1) .. "wall" .. name:sub(#name-1, #name),
+	make_tile({
+		name = name:sub(0, #name - 1) .. "wall" .. name:sub(#name - 1, #name),
 		collision_mask = edge_mask(),
-		layer = 70,
-		pictures = pictures_sfw(),
-		map_color = sf3wc(),
+		layer = 30,
+		pictures = pictures_fw(name:sub(#name, #name + 1)),
+		map_color = map_color,
 	})
 end

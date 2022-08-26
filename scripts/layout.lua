@@ -72,22 +72,7 @@ local pattern_table = {
     }
 }
 
-local info = {}
-
-function populate_info(name, layout_tier_info)
-    info.name = name
-    info.fullType = name:sub(0, #name - 2)
-    info.partType = name:match("(.+)-(.+)-(.+)")
-    info.tier = name:sub(#name, #name + 1)
-    info.overlay_name = name .. "-overlay"
-    info.wall = info.fullType .. "-wall-" .. info.tier
-    info.floor = info.fullType .. "-floor"
-    info.entrance = info.fullType .. "-entrance"
-    info.pattern = info.fullType .. "-pattern-" .. info.tier
-    layout_tier_info()
-end
-
-function make_layout()
+function make_layout(info)
     return {
         name = info.name,
         tier = info.tier,
@@ -115,7 +100,17 @@ function make_layout()
     }
 end
 
-function tier_1_layout()
+function tier_1_layout(name)
+    info = {}
+    info.name = name
+    info.fullType = name:sub(0, #name - 2)
+    info.partType = name:match("(.+)-(.+)-(.+)")
+    info.tier = name:sub(#name, #name + 1)
+    info.overlay_name = name .. "-overlay"
+    info.wall = info.fullType .. "-wall-" .. info.tier
+    info.floor = info.fullType .. "-floor"
+    info.entrance = info.fullType .. "-entrance"
+    info.pattern = info.fullType .. "-pattern-" .. info.tier
     info.inside_size = 30
     info.outside_size = 8
     info.inside_door_x = 0
@@ -171,9 +166,20 @@ function tier_1_layout()
         inside_x = 3.5,
         inside_y = 16.5
     }
+    return make_layout(info)
 end
 
-function tier_2_layout()
+function tier_2_layout(name)
+    info = {}
+    info.name = name
+    info.fullType = name:sub(0, #name - 2)
+    info.partType = name:match("(.+)-(.+)-(.+)")
+    info.tier = name:sub(#name, #name + 1)
+    info.overlay_name = name .. "-overlay"
+    info.wall = info.fullType .. "-wall-" .. info.tier
+    info.floor = info.fullType .. "-floor"
+    info.entrance = info.fullType .. "-entrance"
+    info.pattern = info.fullType .. "-pattern-" .. info.tier
     info.inside_size = 46
     info.outside_size = 12
     info.inside_door_x = 0
@@ -236,9 +242,20 @@ function tier_2_layout()
         inside_x = 3.5,
         inside_y = 24.5
     }
+    return make_layout(info)
 end
 
-function tier_3_layout()
+function tier_3_layout(name)
+    info = {}
+    info.name = name
+    info.fullType = name:sub(0, #name - 2)
+    info.partType = name:match("(.+)-(.+)-(.+)")
+    info.tier = name:sub(#name, #name + 1)
+    info.overlay_name = name .. "-overlay"
+    info.wall = info.fullType .. "-wall-" .. info.tier
+    info.floor = info.fullType .. "-floor"
+    info.entrance = info.fullType .. "-entrance"
+    info.pattern = info.fullType .. "-pattern-" .. info.tier
     info.inside_size = 60
     info.outside_size = 16
     info.inside_door_x = 0
@@ -309,4 +326,5 @@ function tier_3_layout()
         inside_x = 3.5,
         inside_y = 31.5
     }
+    return make_layout(info)
 end
