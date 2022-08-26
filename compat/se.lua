@@ -27,3 +27,9 @@ add_collision_layer("container", "se-delivery-cannon-chest", interior_tile)
 
 -- Energy Beam Receiver
 add_collision_layer("reactor", "se-energy-receiver", interior_tile)
+
+-- Signal Transmitter
+add_collision_layer("roboport", "aai-signal-sender", interior_tile)
+
+-- Signal Receiver
+add_collision_layer("roboport", "aai-signal-receiver", interior_tile)

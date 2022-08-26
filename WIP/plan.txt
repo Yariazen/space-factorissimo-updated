@@ -1,0 +1,6 @@
+space factory 1     graphics
+space factory 2     graphics
+space factory 3     graphics
+
+grav factory 1      t2 factory with ground tiles
+grav factory 2      t3 factory with ground tiles
