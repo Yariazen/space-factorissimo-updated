@@ -22,9 +22,9 @@ tier_1_architecture(spaceFactory1,
         { "se-rocket-science-pack", 1 },
         { "space-science-pack", 1 }
     })
+tile_prototype(spaceFactory1, spaceFactory1_map_color)
 recipe_prototype(spaceFactory1, "space-crafting",
     { { "se-space-platform-scaffold", 500 }, { "se-heat-shielding", 500 }, { "substation", 10 } })
-tile_prototype(spaceFactory1, spaceFactory1_map_color)
 
 -- Space Factory 2
 local spaceFactory2 = "space-factory-2"
@@ -40,9 +40,9 @@ tier_2_architecture(spaceFactory2,
         { "space-science-pack", 1 },
         { "production-science-pack", 1 }
     })
+space_tiles(spaceFactory2, spaceFactory2_map_color)
 recipe_prototype(spaceFactory2, "space-manufacturing",
     { { "se-space-platform-scaffold", 1000 }, { "se-heat-shielding", 1000 }, { "substation", 50 } })
-tile_prototype(spaceFactory2, spaceFactory2_map_color)
 
 -- Space Factory 3
 local spaceFactory3 = "space-factory-3"
@@ -59,11 +59,11 @@ tier_3_architecture(spaceFactory3,
         { "production-science-pack", 1 },
         { "se-material-science-pack-1", 1 }
     })
+space_tiles(spaceFactory3, spaceFactory3_map_color)
 recipe_prototype(spaceFactory3, "space-manufacturing",
     { { "se-space-platform-plating", 5000 }, { "se-heat-shielding", 2000 }, { "substation", 100 } })
-tile_prototype(spaceFactory3, spaceFactory3_map_color)
 
--- Space GravFactory 1 TODO
+-- Space GravFactory 1
 --[[
 local gravFactory1 = "gravity-factory-1"
 factory_prototype("grav-Factory-1",
